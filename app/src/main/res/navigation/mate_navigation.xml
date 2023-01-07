@@ -9,6 +9,18 @@
         android:id="@+id/fragment_mate"
         android:name="com.makeus.reject.view.MateFragment"
         android:label="메이트 찾기"
-        tools:layout="@layout/fragment_mate" />
+        tools:layout="@layout/fragment_mate">
+        <action
+            android:id="@+id/action_fragment_mate_to_detailMateFragment2"
+            app:destination="@id/detailMateFragment2"
+            app:enterAnim="@anim/view_fade_in"
+            app:exitAnim="@anim/view_fade_out"
+            app:popEnterAnim="@anim/view_fade_in"
+            app:popExitAnim="@anim/view_fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMateFragment2"
+        android:name="com.makeus.reject.view.DetailMateFragment"
+        android:label="DetailMateFragment" />
 
 </navigation>

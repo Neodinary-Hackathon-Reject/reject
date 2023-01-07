@@ -2,6 +2,8 @@ package com.makeus.reject.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.reject.R
@@ -26,7 +28,13 @@ class MateFragment : BaseFragment<FragmentMateBinding>(R.layout.fragment_mate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mateAdapter = MateAdapterSecond(requireContext())
+        mateAdapter = MateAdapterSecond(object : MateAdapterSecond.OnItemClickListener {
+            override fun onItemClick(user: User) {
+                val bundle = bundleOf("userId" to user.userId)
+
+                findNavController().navigate(R.id.action_fragment_mate_to_detailMateFragment2, bundle)
+            }
+        })
 
         binding.mateRecyclerView.adapter = mateAdapter
         binding.mateRecyclerView.layoutManager =
