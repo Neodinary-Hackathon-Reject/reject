@@ -20,6 +20,7 @@ class App : Application() {
         //싱글톤 패턴으로 사용 할 객체
         lateinit var sharedPreferences: SharedPreferences
         lateinit var retrofit: Retrofit
+        var statusHeight: Int = 0
 
         const val API_URL = "https://port-0-cloudtype-test-1luhct24lck5opet.gksl2.cloudtype.app/"
     }
@@ -30,7 +31,18 @@ class App : Application() {
         //sharedPreference 인스턴스 생성
         sharedPreferences = applicationContext.getSharedPreferences(Consts.SHARED_PREFERENCES_NAME, MODE_PRIVATE)
 
+        getStatusBarHeight()
         initRetrofitInstance()
+    }
+
+
+    private fun getStatusBarHeight() {
+        //statusbar 높이 구하는 방법
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+
+        if (resourceId > 0) {
+            statusHeight = resources.getDimensionPixelSize(resourceId)
+        }
     }
 
     /**
