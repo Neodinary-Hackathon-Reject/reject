@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/project_navigation"
+    app:startDestination="@+id/fragment_project">
+
+    <fragment
+        android:id="@+id/fragment_project"
+        android:name="com.makeus.reject.ProjectFragment"
+        android:label="프로젝트"
+        tools:layout="@layout/fragment_project"></fragment>
+
+</navigation>
