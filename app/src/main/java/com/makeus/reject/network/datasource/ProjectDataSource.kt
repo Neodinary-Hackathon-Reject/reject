@@ -4,6 +4,7 @@ import com.makeus.reject.App.Companion.retrofit
 import com.makeus.reject.network.api.ProjectService
 import com.makeus.reject.network.model.response.MemberInquireRes
 import com.makeus.reject.network.model.response.ProjectInquireRes
+import com.makeus.reject.network.model.response.RoomInquireRes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,4 +22,10 @@ class ProjectDataSource constructor(
         withContext(ioDispatcher) {
             return@withContext projectService.getUserInquire()
         }
+
+    suspend fun roomInquire(contestId: Long): Result<RoomInquireRes> =
+        withContext(ioDispatcher) {
+            return@withContext projectService.getRoomList(contestId)
+        }
+
 }
