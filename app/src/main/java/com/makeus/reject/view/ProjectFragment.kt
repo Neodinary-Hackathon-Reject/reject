@@ -2,6 +2,7 @@ package com.makeus.reject.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.reject.R
@@ -10,13 +11,14 @@ import com.makeus.reject.adapter.FilterAdapter
 import com.makeus.reject.adapter.model.Filter
 import com.makeus.reject.base.BaseFragment
 import com.makeus.reject.databinding.FragmentProjectBinding
+import com.makeus.reject.viewmodel.ProjectViewModel
+import com.makeus.reject.viewmodel.ViewModelFactory
 
 class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_project) {
     private lateinit var competitionAdapter: ContestAdapterSecond
     private lateinit var filterAdapter: FilterAdapter
+    private val projectViewModel: ProjectViewModel by viewModels { ViewModelFactory() }
 
-    private val competitionList =
-        listOf(1, 2, 3, 4, 5, 6)
     private val filterList =
         listOf(
             Filter("CHECKED", "#서비스/콘텐츠 기획"),
@@ -26,12 +28,13 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        competitionAdapter = ContestAdapterSecond(requireContext())
+        setObserve()
+
+        competitionAdapter = ContestAdapterSecond()
 
         binding.competitionRecyclerView.adapter = competitionAdapter
         binding.competitionRecyclerView.layoutManager =
             GridLayoutManager(activity, 2)
-        competitionAdapter.submitList(competitionList)
 
         filterAdapter = FilterAdapter()
         binding.filterRecyclerView.adapter = filterAdapter
@@ -40,4 +43,9 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
         filterAdapter.submitList(filterList)
     }
 
+    private fun setObserve() {
+        projectViewModel.recommendProjectList.observe(viewLifecycleOwner) {
+            competitionAdapter.submitList(it)
+        }
+    }
 }

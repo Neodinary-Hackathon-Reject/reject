@@ -13,6 +13,9 @@ class ViewModelFactory : ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             val repository = ProjectRepository()
             HomeViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(ProjectViewModel::class.java)) {
+            val repository = ProjectRepository()
+            ProjectViewModel(repository) as T
         } else {
             throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")
         }

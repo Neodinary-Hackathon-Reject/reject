@@ -12,7 +12,6 @@ import com.makeus.reject.R
 import com.makeus.reject.adapter.model.Filter
 
 class FilterAdapter : ListAdapter<Filter, RecyclerView.ViewHolder>(FilterComparator()) {
-    private lateinit var listener: OnItemClickListener
 
     companion object ViewType {
         const val UNCHECKED = 0
@@ -23,9 +22,6 @@ class FilterAdapter : ListAdapter<Filter, RecyclerView.ViewHolder>(FilterCompara
         fun onItemClick(view: View, position: Int)
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
 
     override fun getItemViewType(position: Int): Int {
         val filter = getItem(position)
@@ -49,9 +45,6 @@ class FilterAdapter : ListAdapter<Filter, RecyclerView.ViewHolder>(FilterCompara
         when (getItemViewType(position)) {
             UNCHECKED -> (holder as UncheckedViewHolder).bind(current)
             else -> (holder as CheckedViewHolder).bind(current)
-        }
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(it, position)
         }
     }
 

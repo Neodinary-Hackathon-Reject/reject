@@ -1,6 +1,5 @@
 package com.makeus.reject.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,19 +7,17 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.makeus.reject.R
+import com.makeus.reject.network.model.response.ContestDto
 
-class ContestAdapterSecond(private val context: Context) :
-    ListAdapter<Int, ContestAdapterSecond.ViewHolder>(CompetitionComparator()) {
-    private lateinit var listener: OnItemClickListener
+class ContestAdapterSecond() :
+    ListAdapter<ContestDto, ContestAdapterSecond.ViewHolder>(CompetitionComparator()) {
 
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int)
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.create(parent)
@@ -28,18 +25,14 @@ class ContestAdapterSecond(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current, context)
+        holder.bind(current)
         holder.itemView.setOnClickListener {
-            listener.onItemClick(it, position)
         }
     }
 
-    fun getCompetition(position: Int): Int {
-        return getItem(position)
-    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView = itemView.findViewById<ImageView>(R.id.imageView)
+        private val imageView = itemView.findViewById<ImageView>(R.id.compeitionImgView)
 
         companion object {
             fun create(parent: ViewGroup): ViewHolder {
@@ -49,17 +42,19 @@ class ContestAdapterSecond(private val context: Context) :
             }
         }
 
-        fun bind(image: Int, context: Context) {
-
+        fun bind(item: ContestDto) {
+            Glide.with(imageView)
+                .load(item.imgUrl)
+                .into(imageView)
         }
     }
 
-    class CompetitionComparator : DiffUtil.ItemCallback<Int>() {
-        override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
+    class CompetitionComparator : DiffUtil.ItemCallback<ContestDto>() {
+        override fun areItemsTheSame(oldItem: ContestDto, newItem: ContestDto): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
+        override fun areContentsTheSame(oldItem: ContestDto, newItem: ContestDto): Boolean {
             return oldItem == newItem
         }
     }
