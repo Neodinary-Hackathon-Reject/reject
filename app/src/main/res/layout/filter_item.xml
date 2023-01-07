@@ -5,16 +5,20 @@
     android:layout_height="wrap_content"
     android:padding="5dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="150dp"
-        android:layout_height="182dp"
-        android:background="@drawable/bg_d9d9d9_radius_6dp"
-        android:padding="5dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_eaeaea_radius_45"
+        android:paddingStart="14dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="12dp"
+        android:text="필터"
+        android:textSize="13sp"
+        android:fontFamily="@font/pretendard_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

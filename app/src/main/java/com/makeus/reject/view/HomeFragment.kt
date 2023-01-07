@@ -29,20 +29,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bannerAdapter = BannerAdapter()
+        bannerAdapter = BannerAdapter(requireContext())
 
         binding.bannerRecyclerView.adapter = bannerAdapter
         binding.bannerRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         bannerAdapter.submitList(bannerList)
 
-        competitionAdapter = CompetitionAdapter()
+        competitionAdapter = CompetitionAdapter(requireContext())
         binding.competitionRecyclerView.adapter = competitionAdapter
         binding.competitionRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         competitionAdapter.submitList(competitionList)
 
-        mateAdapter = MateAdapter()
+        mateAdapter = MateAdapter(requireContext())
         binding.mateRecyclerView.adapter = mateAdapter
         binding.mateRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
