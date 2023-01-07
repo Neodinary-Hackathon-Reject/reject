@@ -72,7 +72,7 @@
                     app:layout_constraintTop_toBottomOf="parent" />
 
                 <Button
-                    android:id="@+id/attenBtn"
+                    android:id="@+id/attendBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
