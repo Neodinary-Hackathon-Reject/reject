@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.makeus.reject.R
 import com.makeus.reject.adapter.BannerViewPager2Adapter
 import com.makeus.reject.adapter.ContestAdapter
-import com.makeus.reject.adapter.MateAdapter
+import com.makeus.reject.adapter.MateAdapterSecond
 import com.makeus.reject.base.BaseFragment
 import com.makeus.reject.databinding.FragmentHomeBinding
 import com.makeus.reject.viewmodel.HomeViewModel
@@ -19,7 +19,7 @@ import com.makeus.reject.viewmodel.ViewModelFactory
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var bannerAdapter: BannerViewPager2Adapter = BannerViewPager2Adapter()
     private lateinit var competitionAdapter: ContestAdapter
-    private lateinit var mateAdapter: MateAdapter
+    private lateinit var mateAdapter: MateAdapterSecond
     private val intervalTime = 3000.toLong() // 몇초 간격으로 페이지를 넘길것인지 (1500 = 1.5초)
     private var currentPosition = Int.MAX_VALUE / 2
     private var myHandler = MyHandler() // 배너를 자동으로 스크롤링 하기 위한 핸들러
@@ -81,16 +81,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.competitionRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-        mateAdapter = MateAdapter(requireContext())
+        mateAdapter = MateAdapterSecond(requireContext())
         binding.mateRecyclerView.adapter = mateAdapter
-        binding.mateRecyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        mateAdapter.submitList(mateList)
+
     }
 
     private fun setObserve() {
         homeViewModel.recommendProjectList.observe(viewLifecycleOwner) {
             competitionAdapter.submitList(it)
+        }
+
+        homeViewModel.recommendUserList.observe(viewLifecycleOwner) {
+            mateAdapter.submitList(it)
         }
     }
 

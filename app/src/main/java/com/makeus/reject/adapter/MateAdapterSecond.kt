@@ -16,14 +16,9 @@ import com.makeus.reject.adapter.model.User
 
 class MateAdapterSecond(private val context: Context) :
     ListAdapter<User, MateAdapterSecond.ViewHolder>(MateComparator()) {
-    private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,14 +28,8 @@ class MateAdapterSecond(private val context: Context) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current, context)
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(it, position)
-        }
     }
 
-    fun getMate(position: Int): User {
-        return getItem(position)
-    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val profileImgView = itemView.findViewById<ImageView>(R.id.profileImgView)

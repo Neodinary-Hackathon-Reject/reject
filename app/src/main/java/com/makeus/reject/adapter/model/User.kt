@@ -3,7 +3,7 @@ package com.makeus.reject.adapter.model
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("profileImg")
+    @SerializedName("profileImageUrl")
     val profileImg: String,
     @SerializedName("userId")
     val userId: Long,

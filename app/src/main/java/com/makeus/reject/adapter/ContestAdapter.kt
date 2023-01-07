@@ -11,17 +11,13 @@ import com.bumptech.glide.Glide
 import com.makeus.reject.R
 import com.makeus.reject.network.model.response.ContestDto
 
-class ContestAdapter :
+class ContestAdapter() :
     ListAdapter<ContestDto, ContestAdapter.ViewHolder>(CompetitionComparator()) {
-    private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int)
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.create(parent)
@@ -30,9 +26,6 @@ class ContestAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(it, position)
-        }
     }
 
 
@@ -47,16 +40,16 @@ class ContestAdapter :
             }
         }
 
-        fun bind(item: ContestDto) {
+        fun bind(image: ContestDto) {
             Glide.with(imageView)
-                .load(item.imgUrl)
+                .load(image.imgUrl)
                 .into(imageView)
         }
     }
 
     class CompetitionComparator : DiffUtil.ItemCallback<ContestDto>() {
         override fun areItemsTheSame(oldItem: ContestDto, newItem: ContestDto): Boolean {
-            return oldItem.contestId == newItem.contestId
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: ContestDto, newItem: ContestDto): Boolean {
