@@ -1,5 +1,6 @@
 package com.makeus.reject.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.reject.R
 
-class CompetitionAdapter :
+class CompetitionAdapter(private val context: Context) :
     ListAdapter<Int, CompetitionAdapter.ViewHolder>(CompetitionComparator()) {
     private lateinit var listener: OnItemClickListener
 
@@ -27,7 +28,7 @@ class CompetitionAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current)
+        holder.bind(current, context)
         holder.itemView.setOnClickListener {
             listener.onItemClick(it, position)
         }
@@ -48,7 +49,7 @@ class CompetitionAdapter :
             }
         }
 
-        fun bind(image: Int) {
+        fun bind(image: Int, context: Context) {
             imageView.setImageResource(image)
         }
     }

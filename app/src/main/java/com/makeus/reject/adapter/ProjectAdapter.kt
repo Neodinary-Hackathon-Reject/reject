@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.reject.R
 
-class BannerAdapter(private val context: Context) :
-    ListAdapter<Int, BannerAdapter.ViewHolder>(BannerComparator()) {
+class ProjectAdapter(private val context: Context) :
+    ListAdapter<Int, ProjectAdapter.ViewHolder>(CompetitionComparator()) {
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
@@ -34,7 +34,7 @@ class BannerAdapter(private val context: Context) :
         }
     }
 
-    fun getBanner(position: Int): Int {
+    fun getCompetition(position: Int): Int {
         return getItem(position)
     }
 
@@ -44,17 +44,17 @@ class BannerAdapter(private val context: Context) :
         companion object {
             fun create(parent: ViewGroup): ViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.banner_item, parent, false)
+                    .inflate(R.layout.project_item, parent, false)
                 return ViewHolder(view)
             }
         }
 
         fun bind(image: Int, context: Context) {
-            imageView.setImageResource(image)
+
         }
     }
 
-    class BannerComparator : DiffUtil.ItemCallback<Int>() {
+    class CompetitionComparator : DiffUtil.ItemCallback<Int>() {
         override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
             return oldItem == newItem
         }

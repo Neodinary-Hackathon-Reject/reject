@@ -26,7 +26,7 @@
                     android:id="@+id/banner_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp" />
+                    android:layout_marginStart="20dp" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -44,7 +44,7 @@
                     android:id="@+id/competition_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp" />
 
                 <TextView
@@ -63,7 +63,7 @@
                     android:id="@+id/mate_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp" />
 
             </LinearLayout>
