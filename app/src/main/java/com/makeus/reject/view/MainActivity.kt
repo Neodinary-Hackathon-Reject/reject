@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.makeus.reject.App
 import com.makeus.reject.R
 import com.makeus.reject.base.BaseActivity
 import com.makeus.reject.databinding.ActivityMainBinding
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.layoutMainRoot.setPadding(0, App.statusHeight, 0, 0)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
