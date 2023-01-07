@@ -2,6 +2,7 @@ package com.makeus.reject.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.makeus.reject.network.repository.ProjectRepository
 import com.makeus.reject.network.repository.UserRepository
 
 class ViewModelFactory : ViewModelProvider.Factory {
@@ -9,6 +10,9 @@ class ViewModelFactory : ViewModelProvider.Factory {
         return if (modelClass.isAssignableFrom(SignupViewModel::class.java)) {
             val repository = UserRepository()
             SignupViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            val repository = ProjectRepository()
+            HomeViewModel(repository) as T
         } else {
             throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")
         }

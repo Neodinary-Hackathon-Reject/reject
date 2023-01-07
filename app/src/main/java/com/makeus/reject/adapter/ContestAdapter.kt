@@ -1,6 +1,5 @@
 package com.makeus.reject.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +7,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.makeus.reject.R
+import com.makeus.reject.network.model.response.ContestDto
 
-class ContestAdapter(private val context: Context) :
-    ListAdapter<Int, ContestAdapter.ViewHolder>(CompetitionComparator()) {
+class ContestAdapter :
+    ListAdapter<ContestDto, ContestAdapter.ViewHolder>(CompetitionComparator()) {
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
@@ -28,15 +29,12 @@ class ContestAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current, context)
+        holder.bind(current)
         holder.itemView.setOnClickListener {
             listener.onItemClick(it, position)
         }
     }
 
-    fun getCompetition(position: Int): Int {
-        return getItem(position)
-    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView = itemView.findViewById<ImageView>(R.id.imageView)
@@ -49,17 +47,19 @@ class ContestAdapter(private val context: Context) :
             }
         }
 
-        fun bind(image: Int, context: Context) {
-            imageView.setImageResource(image)
+        fun bind(item: ContestDto) {
+            Glide.with(imageView)
+                .load(item.imgUrl)
+                .into(imageView)
         }
     }
 
-    class CompetitionComparator : DiffUtil.ItemCallback<Int>() {
-        override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
-            return oldItem == newItem
+    class CompetitionComparator : DiffUtil.ItemCallback<ContestDto>() {
+        override fun areItemsTheSame(oldItem: ContestDto, newItem: ContestDto): Boolean {
+            return oldItem.contestId == newItem.contestId
         }
 
-        override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
+        override fun areContentsTheSame(oldItem: ContestDto, newItem: ContestDto): Boolean {
             return oldItem == newItem
         }
     }

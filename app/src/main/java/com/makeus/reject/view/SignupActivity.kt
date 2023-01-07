@@ -2,7 +2,6 @@ package com.makeus.reject.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -79,9 +78,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
             tvSignupPosition.setOnClickListener {
                 Utils.showDropDownMenu(this@SignupActivity, it, positionList, PopupMenu.OnMenuItemClickListener { item ->
                     tvSignupPosition.text = item?.title
-                    signupViewModel.position.value = item.itemId.toLong()
+                    signupViewModel.position.value = item.itemId.toLong() + 1
                     tvSignupPosition.setTextColor(getColor(R.color.black))
-                    Log.e("rak", signupViewModel.position.toString())
                     true
                 })
             }
@@ -141,10 +139,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
                         interestKeywordList.value!!.isNotEmpty() &&
                         tendency.value!!.isNotEmpty()
                     ) {
-                        Log.e("rak", "정규화 통과")
                         signupViewModel.postSignup()
                     } else {
-                        Log.e("rak", place.value!!.isNotEmpty().toString())
                         Toast.makeText(this@SignupActivity, "필수항목을 채워주세요", Toast.LENGTH_SHORT).show()
                     }
                 }

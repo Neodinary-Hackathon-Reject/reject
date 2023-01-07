@@ -3,7 +3,7 @@ package com.makeus.reject.view
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,11 +14,7 @@ import com.makeus.reject.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val backPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            finish()
-        }
-    }
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +27,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment? ?: return
         val navView: BottomNavigationView = binding.navView
-        val navController = host.navController
+        navController = host.navController
         navView.setupWithNavController(navController)
-
-        this.onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
 
     // 메뉴 리소스 XML의 내용을 앱바(App Bar)에 반영
@@ -51,6 +45,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        when (navController.currentDestination?.id) {
+            R.id.fragment_home, R.id.fragment_project, R.id.fragment_mate, R.id.fragment_profile -> {
+                finish()
+            }
+            else -> {
+                super.onBackPressed()
+            }
         }
     }
 }
