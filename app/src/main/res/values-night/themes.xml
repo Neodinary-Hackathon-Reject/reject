@@ -22,4 +22,14 @@
     <style name="Theme.Reject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Reject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!--BottomSheet Background style-->
+    <style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_round_ffffff_top_20</item>
+    </style>
 </resources>

@@ -11,11 +11,11 @@ import com.bumptech.glide.Glide
 import com.makeus.reject.R
 import com.makeus.reject.network.model.response.ContestDto
 
-class ContestAdapterSecond() :
+class ContestAdapterSecond(private val listener: OnItemClickListener) :
     ListAdapter<ContestDto, ContestAdapterSecond.ViewHolder>(CompetitionComparator()) {
 
     interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int)
+        fun onItemClick(contestDto: ContestDto)
     }
 
 
@@ -27,6 +27,7 @@ class ContestAdapterSecond() :
         val current = getItem(position)
         holder.bind(current)
         holder.itemView.setOnClickListener {
+            listener.onItemClick(getItem(position))
         }
     }
 

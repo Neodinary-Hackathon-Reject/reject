@@ -32,6 +32,12 @@
         <item name="android:textColor">@color/chip_check_text</item>
     </style>
 
+    <!--dialog위에서 아래로 아래에서 위로 open,close 애니메이션 주기-->
+    <style name="AnimationPopupStyle">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_up</item>
+        <item name="android:windowExitAnimation">@anim/dialog_up_bottom</item>
+    </style>
+
     <style name="ThemeOverlay.Pawpaw.Chip.Choice" parent="">
         <item name="elevationOverlayEnabled">false</item>
     </style>

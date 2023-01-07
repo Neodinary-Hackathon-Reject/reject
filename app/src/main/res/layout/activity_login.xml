@@ -72,17 +72,18 @@
                 android:paddingBottom="14dp"
                 android:textSize="16sp" />
 
-            <Button
+            <TextView
                 android:id="@+id/loginBtn"
-                android:background="@drawable/bg_284ee3_radius_6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/bg_284ee3_radius_6dp"
                 android:fontFamily="@font/pretendard_medium"
                 android:includeFontPadding="false"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:text="로그인"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -105,9 +106,9 @@
                 android:background="@drawable/bg_ffffff_284ee3_radius_6dp"
                 android:fontFamily="@font/pretendard_medium"
                 android:includeFontPadding="false"
-                android:text="회원가입"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
+                android:text="회원가입"
                 android:textAlignment="center"
                 android:textColor="@color/color_284ee3"
                 android:textSize="18sp" />

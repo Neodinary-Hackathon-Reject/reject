@@ -3,13 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/project_navigation"
-    app:startDestination="@+id/fragment_project_people">
+    app:startDestination="@+id/fragment_project">
 
     <fragment
         android:id="@+id/fragment_project"
         android:name="com.makeus.reject.view.ProjectFragment"
         android:label="프로젝트 찾기"
-        tools:layout="@layout/fragment_project" />
+        tools:layout="@layout/fragment_project">
+        <action
+            android:id="@+id/action_fragment_project_to_projectDetailFragment"
+            app:destination="@id/projectDetailFragment"
+            app:enterAnim="@anim/view_fade_in"
+            app:exitAnim="@anim/view_fade_out"
+            app:popEnterAnim="@anim/view_fade_in"
+            app:popExitAnim="@anim/view_fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/projectDetailFragment"
+        android:name="com.makeus.reject.view.ProjectDetailFragment"
+        android:label="ProjectDetailFragment"
+        tools:layout="@layout/fragment_project_detail">
+        <argument
+            android:name="imgUrl"
+            app:argType="string" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/fragment_project_detail"
@@ -28,5 +47,6 @@
         android:name="com.makeus.reject.view.ProjectEditFragment"
         android:label="프로젝트 추가"
         tools:layout="@layout/fragment_project_edit" />
+
 
 </navigation>
