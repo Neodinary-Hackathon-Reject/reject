@@ -44,7 +44,7 @@ class MateAdapter(private val context: Context) :
         companion object {
             fun create(parent: ViewGroup): ViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.mate_item, parent, false)
+                    .inflate(R.layout.mate_item_second, parent, false)
                 return ViewHolder(view)
             }
         }
