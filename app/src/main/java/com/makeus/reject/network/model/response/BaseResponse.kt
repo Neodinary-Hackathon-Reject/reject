@@ -2,11 +2,11 @@ package com.makeus.reject.network.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginRes(
+open class BaseResponse(
     @SerializedName("isSuccess")
-    val isSuccess: String,
+    val isSuccess: Boolean = false,
     @SerializedName("code")
-    val code: String,
+    val code: Int = 0,
     @SerializedName("message")
-    val message: String
+    val message: String? = null
 )

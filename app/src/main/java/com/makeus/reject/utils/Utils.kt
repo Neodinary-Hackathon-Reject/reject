@@ -1,9 +1,11 @@
 package com.makeus.reject.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 
 class Utils {
     companion object {
@@ -25,6 +27,17 @@ class Utils {
                     @Suppress("DEPRECATION")
                     window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 }
+            }
+        }
+
+        @JvmStatic
+        fun showDropDownMenu(context: Context, view: View, menuList: List<String>, listener: PopupMenu.OnMenuItemClickListener) {
+            PopupMenu(context, view).run {
+                menuList.forEachIndexed { index, s ->
+                    menu.add(0, index, 0, s)
+                }
+                setOnMenuItemClickListener(listener)
+                show()
             }
         }
     }

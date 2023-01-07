@@ -22,4 +22,18 @@
     <style name="Theme.Reject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Reject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--Chip Style-->
+    <style name="Widget.Pawpaw.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Pawpaw.Chip.Choice</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="chipBackgroundColor">@color/chip_check_bg</item>
+        <item name="android:textColor">@color/chip_check_text</item>
+    </style>
+
+    <style name="ThemeOverlay.Pawpaw.Chip.Choice" parent="">
+        <item name="elevationOverlayEnabled">false</item>
+    </style>
+
 </resources>

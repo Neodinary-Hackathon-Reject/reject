@@ -21,11 +21,6 @@ data class SignupReq(
     val portfolio: String,
     @SerializedName("keywordList")
     val keywordList: List<String>,
-    @SerializedName("keyword")
-    val keyword: String,
     @SerializedName("tendencyList")
     val tendencyList: List<String>,
-    @SerializedName("tendency")
-    val tendency: String
-
 )

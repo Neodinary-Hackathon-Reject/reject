@@ -17,6 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:paddingBottom="40dp"
             tools:context=".view.SignupActivity">
 
@@ -55,6 +56,7 @@
                 android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="10dp"
+                android:singleLine="true"
                 android:textColor="@color/color_979797"
                 android:textCursorDrawable="@drawable/cursor_black"
                 android:textSize="12dp"
@@ -66,8 +68,8 @@
                 android:id="@+id/tv_signup_email_check"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:background="@drawable/selector_blue_button"
-                android:enabled="false"
+                android:background="@drawable/selector_email_duplication_button"
+                android:enabled="true"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:paddingHorizontal="14dp"
@@ -104,6 +106,7 @@
                 android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="10dp"
+                android:singleLine="true"
                 android:textColor="@color/color_979797"
                 android:textCursorDrawable="@drawable/cursor_black"
                 android:textSize="12dp"
@@ -134,12 +137,25 @@
                 android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="10dp"
+                android:singleLine="true"
                 android:textColor="@color/color_979797"
                 android:textCursorDrawable="@drawable/cursor_black"
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="@id/guideline40End"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@+id/tv_signup_pwd_check_title" />
+
+            <TextView
+                android:id="@+id/tv_signup_duplication_warring"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="비밀번호가 일치하지 않습니다."
+                android:textColor="#FB1515"
+                android:textSize="10dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/et_signup_pwd_check" />
 
             <TextView
                 android:id="@+id/tv_signup_nick_title"
@@ -151,7 +167,7 @@
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/et_signup_pwd_check" />
+                app:layout_constraintTop_toBottomOf="@id/tv_signup_duplication_warring" />
 
             <EditText
                 android:id="@+id/et_signup_nick_check"
@@ -160,10 +176,11 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_ffffff_line_c6c6c6_radius_6dp"
                 android:hint="닉네임 입력(6자리 이내)"
-                android:maxLength="12"
+                android:maxLength="6"
                 android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="10dp"
+                android:singleLine="true"
                 android:textColor="@color/color_979797"
                 android:textCursorDrawable="@drawable/cursor_black"
                 android:textSize="12dp"
@@ -185,7 +202,7 @@
                 app:layout_constraintTop_toBottomOf="@id/et_signup_nick_check" />
 
             <TextView
-                android:id="@+id/et_signup_position"
+                android:id="@+id/tv_signup_position"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -210,37 +227,87 @@
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/et_signup_position" />
+                app:layout_constraintTop_toBottomOf="@id/tv_signup_position" />
 
-            <EditText
-                android:id="@+id/et_signup_interest_keyword"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_signup_interest_keyword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_ffffff_line_c6c6c6_radius_6dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:hint="관심 있는 키워드를 등록해 주세요!"
-                android:maxLines="1"
-                android:paddingVertical="14dp"
-                android:paddingStart="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/color_979797"
-                android:textSize="12dp"
-                app:layout_constraintEnd_toEndOf="@id/guideline40End"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@+id/tv_signup_interest_keyword_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_signup_interest_keyword_title">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_signup_interest_keyword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:clipToPadding="true"
-                android:orientation="horizontal"
-                android:paddingStart="20dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/et_signup_interest_keyword"
-                tools:listitem="@layout/item_signup_interest_keyword_rv" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_1"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#Pr아이디어" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_2"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#공공컨설팅" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_3"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#서비스/콘텐츠기획" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_4"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#머신러닝" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_5"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#자바" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_6"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#파이썬" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_7"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#PM" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_8"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#의료" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_9"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#SNS 서비스" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/c_10"
+                    style="@style/Widget.Pawpaw.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#임베디드 개발자" />
+
+            </com.google.android.material.chip.ChipGroup>
 
 
             <TextView
@@ -254,7 +321,7 @@
                 android:textColor="@color/black"
                 android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@+id/rv_signup_interest_keyword" />
+                app:layout_constraintTop_toBottomOf="@+id/cg_signup_interest_keyword" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_signup_meeting"
@@ -269,6 +336,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_signup_place_title">
 
                 <TextView
+                    android:id="@+id/tv_signup_meeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -305,6 +373,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_signup_place_title">
 
                 <TextView
+                    android:id="@+id/tv_signup_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -341,16 +410,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/cl_signup_meeting" />
 
             <EditText
-                android:id="@+id/tv_signup_tendency"
+                android:id="@+id/et_signup_tendency"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_ffffff_line_c6c6c6_radius_6dp"
                 android:hint="ex) 꼼꼼한"
+                android:imeOptions="actionDone"
                 android:paddingVertical="14dp"
                 android:paddingStart="10dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/color_979797"
+                android:textCursorDrawable="@drawable/cursor_black"
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -361,12 +433,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:clipToPadding="true"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
                 android:paddingStart="20dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/tv_signup_tendency"
-                tools:listitem="@layout/item_signup_interest_keyword_rv" />
+                app:layout_constraintTop_toBottomOf="@+id/et_signup_tendency"
+                tools:listitem="@layout/item_signup_tag_rv" />
 
             <TextView
                 android:id="@+id/tv_signup_introduce_title"
@@ -390,10 +462,11 @@
                 android:gravity="top"
                 android:hint="두 세 줄로 간단하게 작성해주세요!(최대 100자)"
                 android:inputType="textMultiLine"
-                android:maxLength="5"
+                android:maxLines="5"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="12dp"
                 android:textColorHint="@color/color_979797"
+                android:textCursorDrawable="@drawable/cursor_black"
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -425,17 +498,18 @@
                 android:paddingVertical="14dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/color_979797"
+                android:textCursorDrawable="@drawable/cursor_black"
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@+id/tv_signup_portfolio_title" />
 
             <TextView
+                android:id="@+id/tv_signup_confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/selector_blue_button"
-                android:enabled="false"
+                android:background="@drawable/bg_284ee3_radius_6dp"
                 android:fontFamily="@font/pretendard_medium"
                 android:gravity="center"
                 android:includeFontPadding="false"
