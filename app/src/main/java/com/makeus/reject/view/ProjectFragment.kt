@@ -5,14 +5,14 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.reject.R
-import com.makeus.reject.adapter.Filter
+import com.makeus.reject.adapter.ContestAdapterSecond
 import com.makeus.reject.adapter.FilterAdapter
-import com.makeus.reject.adapter.ProjectAdapter
+import com.makeus.reject.adapter.model.Filter
 import com.makeus.reject.base.BaseFragment
 import com.makeus.reject.databinding.FragmentProjectBinding
 
 class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_project) {
-    private lateinit var competitionAdapter: ProjectAdapter
+    private lateinit var competitionAdapter: ContestAdapterSecond
     private lateinit var filterAdapter: FilterAdapter
 
     private val competitionList =
@@ -26,7 +26,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        competitionAdapter = ProjectAdapter(requireContext())
+        competitionAdapter = ContestAdapterSecond(requireContext())
 
         binding.competitionRecyclerView.adapter = competitionAdapter
         binding.competitionRecyclerView.layoutManager =

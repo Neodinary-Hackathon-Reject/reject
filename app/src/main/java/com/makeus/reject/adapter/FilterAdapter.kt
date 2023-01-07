@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.reject.R
+import com.makeus.reject.adapter.model.Filter
 
 class FilterAdapter : ListAdapter<Filter, RecyclerView.ViewHolder>(FilterComparator()) {
     private lateinit var listener: OnItemClickListener

@@ -6,6 +6,7 @@ import com.makeus.reject.network.api.UserService
 import com.makeus.reject.network.model.request.LoginReq
 import com.makeus.reject.network.model.request.SignupReq
 import com.makeus.reject.network.model.response.BaseResponse
+import com.makeus.reject.network.model.response.GetMatesRes
 import com.makeus.reject.network.model.response.SignupRes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -30,4 +31,10 @@ class UserDataSource constructor(
             Log.e("rak", "호출")
             return@withContext userService.checkEmailDuplication(email)
         }
+
+    suspend fun getMates(): Result<GetMatesRes> =
+        withContext(ioDispatcher) {
+            return@withContext userService.getMates()
+        }
+
 }

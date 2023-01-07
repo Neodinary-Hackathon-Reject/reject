@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.reject.R
 
-class CompetitionAdapter(private val context: Context) :
-    ListAdapter<Int, CompetitionAdapter.ViewHolder>(CompetitionComparator()) {
+class ContestAdapter(private val context: Context) :
+    ListAdapter<Int, ContestAdapter.ViewHolder>(CompetitionComparator()) {
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
@@ -44,7 +44,7 @@ class CompetitionAdapter(private val context: Context) :
         companion object {
             fun create(parent: ViewGroup): ViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.competition_item, parent, false)
+                    .inflate(R.layout.contest_item, parent, false)
                 return ViewHolder(view)
             }
         }

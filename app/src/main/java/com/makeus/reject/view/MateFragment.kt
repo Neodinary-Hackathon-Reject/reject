@@ -5,10 +5,10 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.reject.R
-import com.makeus.reject.adapter.Filter
 import com.makeus.reject.adapter.FilterAdapter
-import com.makeus.reject.adapter.Mate
 import com.makeus.reject.adapter.MateAdapterSecond
+import com.makeus.reject.adapter.model.Filter
+import com.makeus.reject.adapter.model.User
 import com.makeus.reject.base.BaseFragment
 import com.makeus.reject.databinding.FragmentMateBinding
 
@@ -16,10 +16,10 @@ class MateFragment : BaseFragment<FragmentMateBinding>(R.layout.fragment_mate) {
     private lateinit var mateAdapter: MateAdapterSecond
     private lateinit var filterAdapter: FilterAdapter
 
-    private val mateList =
+    private val userLists =
         listOf(
-            Mate("", "김", "이", listOf("#fdas", "#asdf"), "박"),
-            Mate("", "김", "이", listOf("#fdas", "#asdf"), "박")
+            User("", 1L, "김", "이", "박", listOf("#fdas", "#asdf")),
+            User("", 2L, "김", "이", "박", listOf("#fdas", "#asdf"))
         )
     private val filterList =
         listOf(Filter("UNCHECKED", "지역"), Filter("CHECKED", "직무"))
@@ -31,7 +31,7 @@ class MateFragment : BaseFragment<FragmentMateBinding>(R.layout.fragment_mate) {
         binding.mateRecyclerView.adapter = mateAdapter
         binding.mateRecyclerView.layoutManager =
             GridLayoutManager(activity, 2)
-        mateAdapter.submitList(mateList)
+        mateAdapter.submitList(userLists)
 
         filterAdapter = FilterAdapter()
         binding.filterRecyclerView.adapter = filterAdapter

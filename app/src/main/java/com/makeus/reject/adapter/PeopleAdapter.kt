@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide
 import com.makeus.reject.R
 import com.makeus.reject.adapter.model.User
 
-class MateAdapterSecond(private val context: Context) :
-    ListAdapter<User, MateAdapterSecond.ViewHolder>(MateComparator()) {
+class PeopleAdapter(private val context: Context) :
+    ListAdapter<User, PeopleAdapter.ViewHolder>(MateComparator()) {
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
@@ -45,7 +45,6 @@ class MateAdapterSecond(private val context: Context) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val profileImgView = itemView.findViewById<ImageView>(R.id.profileImgView)
         private val nickname = itemView.findViewById<TextView>(R.id.nickname)
-        private val region = itemView.findViewById<TextView>(R.id.region)
         private val job = itemView.findViewById<TextView>(R.id.job)
         private val keywordRecyclerView =
             itemView.findViewById<RecyclerView>(R.id.keywordRecyclerView)
@@ -53,7 +52,7 @@ class MateAdapterSecond(private val context: Context) :
         companion object {
             fun create(parent: ViewGroup): ViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.mate_item_second, parent, false)
+                    .inflate(R.layout.people_item, parent, false)
                 return ViewHolder(view)
             }
         }
@@ -72,7 +71,6 @@ class MateAdapterSecond(private val context: Context) :
                 .circleCrop()
                 .into(profileImgView)
             nickname.text = item.nickName
-            region.text = item.address
             job.text = item.job
         }
     }

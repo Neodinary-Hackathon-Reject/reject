@@ -4,6 +4,7 @@ import com.makeus.reject.network.datasource.UserDataSource
 import com.makeus.reject.network.model.request.LoginReq
 import com.makeus.reject.network.model.request.SignupReq
 import com.makeus.reject.network.model.response.BaseResponse
+import com.makeus.reject.network.model.response.GetMatesRes
 import com.makeus.reject.network.model.response.SignupRes
 
 class UserRepository constructor(private val userDataSource: UserDataSource = UserDataSource()) {
@@ -15,4 +16,7 @@ class UserRepository constructor(private val userDataSource: UserDataSource = Us
 
     suspend fun checkEmailDuplication(email: String): Result<BaseResponse> =
         userDataSource.checkEmailDuplication(email)
+
+    suspend fun getMates(): Result<GetMatesRes> =
+        userDataSource.getMates()
 }

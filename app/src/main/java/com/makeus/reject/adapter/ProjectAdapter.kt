@@ -4,14 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.reject.R
+import com.makeus.reject.adapter.model.Project
 
 class ProjectAdapter(private val context: Context) :
-    ListAdapter<Int, ProjectAdapter.ViewHolder>(CompetitionComparator()) {
+    ListAdapter<Project, ProjectAdapter.ViewHolder>(ProjectComparator()) {
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
@@ -34,12 +36,16 @@ class ProjectAdapter(private val context: Context) :
         }
     }
 
-    fun getCompetition(position: Int): Int {
+    fun getProject(position: Int): Project {
         return getItem(position)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView = itemView.findViewById<ImageView>(R.id.imageView)
+        private val titleText = itemView.findViewById<TextView>(R.id.titleText)
+        private val introText = itemView.findViewById<TextView>(R.id.introText)
+        private val keywordRecyclerView =
+            itemView.findViewById<RecyclerView>(R.id.keywordRecyclerView)
+        private val peopleText = itemView.findViewById<TextView>(R.id.peopleText)
 
         companion object {
             fun create(parent: ViewGroup): ViewHolder {
@@ -49,17 +55,26 @@ class ProjectAdapter(private val context: Context) :
             }
         }
 
-        fun bind(image: Int, context: Context) {
+        fun bind(item: Project, context: Context) {
+            val adapter = KeywordAdapter()
+            keywordRecyclerView.adapter = adapter
+            keywordRecyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            val keywordList = listOf("#전략적인", "#성실한", "#열정적인")
+            adapter.submitList(keywordList)
 
+            titleText.text = item.title
+            introText.text = item.intro
+            peopleText.text = "${item.currentPeople}/${item.totalPeople}"
         }
     }
 
-    class CompetitionComparator : DiffUtil.ItemCallback<Int>() {
-        override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
+    class ProjectComparator : DiffUtil.ItemCallback<Project>() {
+        override fun areItemsTheSame(oldItem: Project, newItem: Project): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
+        override fun areContentsTheSame(oldItem: Project, newItem: Project): Boolean {
             return oldItem == newItem
         }
     }

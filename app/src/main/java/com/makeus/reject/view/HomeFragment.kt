@@ -5,14 +5,14 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.reject.R
 import com.makeus.reject.adapter.BannerAdapter
-import com.makeus.reject.adapter.CompetitionAdapter
+import com.makeus.reject.adapter.ContestAdapter
 import com.makeus.reject.adapter.MateAdapter
 import com.makeus.reject.base.BaseFragment
 import com.makeus.reject.databinding.FragmentHomeBinding
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var bannerAdapter: BannerAdapter
-    private lateinit var competitionAdapter: CompetitionAdapter
+    private lateinit var contestAdapter: ContestAdapter
     private lateinit var mateAdapter: MateAdapter
 
     private val bannerList =
@@ -36,11 +36,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         bannerAdapter.submitList(bannerList)
 
-        competitionAdapter = CompetitionAdapter(requireContext())
-        binding.competitionRecyclerView.adapter = competitionAdapter
+        contestAdapter = ContestAdapter(requireContext())
+        binding.competitionRecyclerView.adapter = contestAdapter
         binding.competitionRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        competitionAdapter.submitList(competitionList)
+        contestAdapter.submitList(competitionList)
 
         mateAdapter = MateAdapter(requireContext())
         binding.mateRecyclerView.adapter = mateAdapter
