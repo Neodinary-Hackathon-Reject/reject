@@ -1,10 +1,11 @@
-package com.makeus.reject
+package com.makeus.reject.view
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.makeus.reject.R
 import com.makeus.reject.base.BaseActivity
 import com.makeus.reject.databinding.ActivityMainBinding
 

@@ -1,11 +1,12 @@
-package com.makeus.reject
+package com.makeus.reject.view
 
 import android.os.Bundle
 import android.view.View
+import com.makeus.reject.R
 import com.makeus.reject.base.BaseFragment
-import com.makeus.reject.databinding.FragmentProfileBinding
+import com.makeus.reject.databinding.FragmentProjectBinding
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
+class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_project) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

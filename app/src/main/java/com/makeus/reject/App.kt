@@ -2,7 +2,6 @@ package com.makeus.reject
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.util.Log
 import com.makeus.reject.common.Consts
 import com.makeus.reject.exception.ResultCallAdapterFactory
 import okhttp3.Interceptor
@@ -38,7 +37,6 @@ class App : Application() {
      * Retrofit 인스턴스 생성 메소드
      */
     private fun initRetrofitInstance() {
-        Log.e("rak", "retrofit")
         val client: OkHttpClient = OkHttpClient.Builder()
             .readTimeout(5000, TimeUnit.MILLISECONDS)
             .connectTimeout(5000, TimeUnit.MILLISECONDS)
