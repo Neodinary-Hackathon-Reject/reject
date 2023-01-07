@@ -9,6 +9,6 @@
         android:id="@+id/fragment_home"
         android:name="com.makeus.reject.view.HomeFragment"
         android:label="홈"
-        tools:layout="@layout/fragment_home"></fragment>
+        tools:layout="@layout/fragment_home" />
 
 </navigation>

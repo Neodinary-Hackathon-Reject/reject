@@ -4,20 +4,27 @@
         android:id="@+id/home_navigation"
         android:checked="false"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_home"
         android:title="홈" />
 
     <item
         android:id="@+id/project_navigation"
         android:checked="false"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="프로젝트" />
+        android:icon="@drawable/ic_project"
+        android:title="프로젝트 찾기" />
+
+    <item
+        android:id="@+id/mate_navigation"
+        android:checked="false"
+        android:enabled="true"
+        android:icon="@drawable/ic_mate"
+        android:title="메이트 찾기" />
 
     <item
         android:id="@+id/profile_navigation"
         android:checked="false"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="프로필" />
+        android:icon="@drawable/ic_user"
+        android:title="마이페이지" />
 </menu>

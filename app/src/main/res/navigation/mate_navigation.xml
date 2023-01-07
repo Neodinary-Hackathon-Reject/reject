@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mate_navigation"
+    app:startDestination="@+id/fragment_mate">
+
+    <fragment
+        android:id="@+id/fragment_mate"
+        android:name="com.makeus.reject.view.MateFragment"
+        android:label="메이트 찾기"
+        tools:layout="@layout/fragment_mate" />
+
+</navigation>

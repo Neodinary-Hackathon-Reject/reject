@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragment_profile"
         android:name="com.makeus.reject.view.ProfileFragment"
-        android:label="프로필"
-        tools:layout="@layout/fragment_profile"></fragment>
+        android:label="마이페이지"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>
