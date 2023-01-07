@@ -3,12 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/project_navigation"
-    app:startDestination="@+id/fragment_project">
+    app:startDestination="@+id/fragment_project_people">
 
     <fragment
         android:id="@+id/fragment_project"
         android:name="com.makeus.reject.view.ProjectFragment"
         android:label="프로젝트 찾기"
         tools:layout="@layout/fragment_project" />
+
+    <fragment
+        android:id="@+id/fragment_project_detail"
+        android:name="com.makeus.reject.view.ProjectDetailFragment"
+        android:label="프로젝트 상세"
+        tools:layout="@layout/fragment_project_detail" />
+
+    <fragment
+        android:id="@+id/fragment_project_people"
+        android:name="com.makeus.reject.view.ProjectPeopleFragment"
+        android:label="프로젝트 인원 목록"
+        tools:layout="@layout/fragment_project_people" />
+
+    <fragment
+        android:id="@+id/fragment_project_edit"
+        android:name="com.makeus.reject.view.ProjectEditFragment"
+        android:label="프로젝트 추가"
+        tools:layout="@layout/fragment_project_edit" />
 
 </navigation>

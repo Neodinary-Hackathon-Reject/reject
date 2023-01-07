@@ -11,5 +11,12 @@ class ProjectPeopleFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.attendBtn.setOnClickListener {
+            val dialog = AlarmFragmentDialog()
+            AlarmFragmentDialog().show(
+                parentFragmentManager, "알림"
+            )
+        }
     }
 }
