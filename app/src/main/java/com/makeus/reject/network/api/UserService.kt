@@ -3,12 +3,10 @@ package com.makeus.reject.network.api
 import com.makeus.reject.network.model.request.LoginReq
 import com.makeus.reject.network.model.request.SignupReq
 import com.makeus.reject.network.model.response.BaseResponse
+import com.makeus.reject.network.model.response.GetMateDetailRes
 import com.makeus.reject.network.model.response.GetMatesRes
 import com.makeus.reject.network.model.response.SignupRes
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface UserService {
     @POST("/users/signup")
@@ -22,4 +20,10 @@ interface UserService {
 
     @GET("/users")
     suspend fun getMates(): Result<GetMatesRes>
+
+    @GET("/users/detail/{userId}")
+    suspend fun getMateDetail(
+        @Header("Authorization") token: String,
+        @Path("userId") userId: Long
+    ): Result<GetMateDetailRes>
 }

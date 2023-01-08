@@ -37,13 +37,13 @@
             android:text="닉네임"
             android:textColor="@color/color_121212"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/region"
+            app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintStart_toEndOf="@+id/profileImgView"
             app:layout_constraintTop_toTopOf="@+id/profileImgView"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/region"
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
@@ -90,7 +90,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/region"
+            app:layout_constraintTop_toBottomOf="@+id/email"
             tools:listitem="@layout/keyword_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,14 @@
 package com.makeus.reject.network.datasource
 
 import android.util.Log
+import com.makeus.reject.App
 import com.makeus.reject.App.Companion.retrofit
+import com.makeus.reject.common.Consts
 import com.makeus.reject.network.api.UserService
 import com.makeus.reject.network.model.request.LoginReq
 import com.makeus.reject.network.model.request.SignupReq
 import com.makeus.reject.network.model.response.BaseResponse
+import com.makeus.reject.network.model.response.GetMateDetailRes
 import com.makeus.reject.network.model.response.GetMatesRes
 import com.makeus.reject.network.model.response.SignupRes
 import kotlinx.coroutines.CoroutineDispatcher
@@ -35,6 +38,15 @@ class UserDataSource constructor(
     suspend fun getMates(): Result<GetMatesRes> =
         withContext(ioDispatcher) {
             return@withContext userService.getMates()
+        }
+
+    suspend fun getMateDetail(userId: Long): Result<GetMateDetailRes> =
+        withContext(ioDispatcher) {
+            return@withContext userService.getMateDetail(
+                App.sharedPreferences.getString(
+                    Consts.X_ACCESS_TOKEN, ""
+                ) ?: "", userId
+            )
         }
 
 }

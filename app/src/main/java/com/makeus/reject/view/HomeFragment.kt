@@ -35,16 +35,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels { ViewModelFactory() }
 
-    private val competitionList = listOf(
-        R.drawable.competition_1,
-        R.drawable.competition_2,
-        R.drawable.competition_3,
-        R.drawable.competition_4,
-        R.drawable.competition_5
-    )
-    private val mateList =
-        listOf(R.drawable.bg_284ee3_radius_6dp, R.drawable.bg_ffffff_line_c6c6c6_radius_6dp)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

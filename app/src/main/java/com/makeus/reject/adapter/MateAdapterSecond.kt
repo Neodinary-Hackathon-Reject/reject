@@ -1,6 +1,5 @@
 package com.makeus.reject.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class MateAdapterSecond(private val listener: OnItemClickListener) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val profileImgView = itemView.findViewById<ImageView>(R.id.profileImgView)
         private val nickname = itemView.findViewById<TextView>(R.id.nickname)
-        private val region = itemView.findViewById<TextView>(R.id.region)
+        private val region = itemView.findViewById<TextView>(R.id.email)
         private val job = itemView.findViewById<TextView>(R.id.job)
         private val keywordRecyclerView =
             itemView.findViewById<RecyclerView>(R.id.keywordRecyclerView)

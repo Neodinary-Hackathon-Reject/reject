@@ -23,6 +23,9 @@ class ViewModelFactory : ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(ProjectPeopleViewModel::class.java)) {
             val repository = RoomRepository()
             ProjectPeopleViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(MateDetailViewModel::class.java)) {
+            val repository = UserRepository()
+            MateDetailViewModel(repository) as T
         } else {
             throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")
         }
