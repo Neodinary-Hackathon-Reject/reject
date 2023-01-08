@@ -14,8 +14,12 @@ import com.bumptech.glide.Glide
 import com.makeus.reject.R
 import com.makeus.reject.adapter.model.User
 
-class MateAdapterSecond(private val context: Context) :
+class MateAdapterSecond(private val listener: OnItemClickListener) :
     ListAdapter<User, MateAdapterSecond.ViewHolder>(MateComparator()) {
+
+    interface OnItemClickListener {
+        fun onItemClick(user: User)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.create(parent)
@@ -23,7 +27,10 @@ class MateAdapterSecond(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current, context)
+        holder.bind(current)
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(getItem(position))
+        }
     }
 
 
@@ -43,16 +50,16 @@ class MateAdapterSecond(private val context: Context) :
             }
         }
 
-        fun bind(item: User, context: Context) {
+        fun bind(item: User) {
             val adapter = KeywordAdapter()
             keywordRecyclerView.adapter = adapter
             keywordRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(profileImgView.context, LinearLayoutManager.HORIZONTAL, false)
             val keywordList = listOf("#AI 개발", "#사업 기획자", "#백엔드 개발", "#프론트엔드 개발")
             adapter.submitList(keywordList)
 
             Glide
-                .with(context)
+                .with(profileImgView)
                 .load(item.profileImg)
                 .circleCrop()
                 .into(profileImgView)

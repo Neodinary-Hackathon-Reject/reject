@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.makeus.reject.R
 import com.makeus.reject.adapter.BannerViewPager2Adapter
 import com.makeus.reject.adapter.ContestAdapter
 import com.makeus.reject.adapter.MateAdapterSecond
+import com.makeus.reject.adapter.model.User
 import com.makeus.reject.base.BaseFragment
 import com.makeus.reject.databinding.FragmentHomeBinding
 import com.makeus.reject.viewmodel.HomeViewModel
@@ -19,7 +22,13 @@ import com.makeus.reject.viewmodel.ViewModelFactory
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var bannerAdapter: BannerViewPager2Adapter = BannerViewPager2Adapter()
     private lateinit var competitionAdapter: ContestAdapter
-    private lateinit var mateAdapter: MateAdapterSecond
+    private var mateAdapter = MateAdapterSecond(object : MateAdapterSecond.OnItemClickListener {
+        override fun onItemClick(user: User) {
+            val bundle = bundleOf("userId" to user.userId)
+
+            findNavController().navigate(R.id.action_fragment_home_to_detailMateFragment, bundle)
+        }
+    })
     private val intervalTime = 3000.toLong() // 몇초 간격으로 페이지를 넘길것인지 (1500 = 1.5초)
     private var currentPosition = Int.MAX_VALUE / 2
     private var myHandler = MyHandler() // 배너를 자동으로 스크롤링 하기 위한 핸들러
@@ -81,7 +90,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.competitionRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-        mateAdapter = MateAdapterSecond(requireContext())
         binding.mateRecyclerView.adapter = mateAdapter
 
     }

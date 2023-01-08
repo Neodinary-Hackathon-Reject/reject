@@ -9,6 +9,19 @@
         android:id="@+id/fragment_home"
         android:name="com.makeus.reject.view.HomeFragment"
         android:label="홈"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_fragment_home_to_detailMateFragment"
+            app:destination="@id/detailMateFragment"
+            app:enterAnim="@anim/view_fade_in"
+            app:exitAnim="@anim/view_fade_out"
+            app:popEnterAnim="@anim/view_fade_in"
+            app:popExitAnim="@anim/view_fade_out"/>
+    </fragment>
+    <fragment
+        android:id="@+id/detailMateFragment"
+        android:name="com.makeus.reject.view.DetailMateFragment"
+        android:label="DetailMateFragment"
+        tools:layout="@layout/fragment_detail_mate" />
 
 </navigation>
