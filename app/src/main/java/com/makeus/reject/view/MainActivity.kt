@@ -3,6 +3,7 @@ package com.makeus.reject.view
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -35,6 +36,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
+    }
+
+    fun hideAppbar() {
+        binding.toolbar.visibility = View.GONE
     }
 
     //item 버튼 클릭 했을 때

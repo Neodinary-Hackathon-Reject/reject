@@ -4,6 +4,8 @@ import com.makeus.reject.App
 import com.makeus.reject.App.Companion.retrofit
 import com.makeus.reject.common.Consts
 import com.makeus.reject.network.api.ProjectService
+import com.makeus.reject.network.model.request.CreateRoomReq
+import com.makeus.reject.network.model.response.CreateRoomRes
 import com.makeus.reject.network.model.response.MemberInquireRes
 import com.makeus.reject.network.model.response.ProjectInquireRes
 import com.makeus.reject.network.model.response.RoomInquireRes
@@ -32,6 +34,11 @@ class ProjectDataSource constructor(
                     Consts.X_ACCESS_TOKEN, ""
                 ) ?: "", contestId
             )
+        }
+
+    suspend fun createRoom(createRoomReq: CreateRoomReq): Result<CreateRoomRes> =
+        withContext(ioDispatcher) {
+            return@withContext projectService.postCreateRoom(App.Companion.sharedPreferences.getString(Consts.X_ACCESS_TOKEN, "") ?: "", createRoomReq)
         }
 
 }

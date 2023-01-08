@@ -1,6 +1,8 @@
 package com.makeus.reject.network.repository
 
 import com.makeus.reject.network.datasource.ProjectDataSource
+import com.makeus.reject.network.model.request.CreateRoomReq
+import com.makeus.reject.network.model.response.CreateRoomRes
 import com.makeus.reject.network.model.response.MemberInquireRes
 import com.makeus.reject.network.model.response.ProjectInquireRes
 import com.makeus.reject.network.model.response.RoomInquireRes
@@ -14,4 +16,7 @@ class ProjectRepository constructor(private val projectDataSource: ProjectDataSo
 
     suspend fun roomInquire(contestId: Long): Result<RoomInquireRes> =
         projectDataSource.roomInquire(contestId)
+
+    suspend fun createRoom(createRoomReq: CreateRoomReq): Result<CreateRoomRes> =
+        projectDataSource.createRoom(createRoomReq)
 }
