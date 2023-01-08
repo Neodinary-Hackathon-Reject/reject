@@ -1,6 +1,7 @@
 package com.makeus.reject.network.model.response
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RoomInquireRes(
     @SerializedName("result")
@@ -22,4 +23,4 @@ data class RoomDto(
     val maxUserCount: Int,
     @SerializedName("currentUserCount")
     val currentUserCount: Int
-)
+) : Serializable

@@ -17,10 +17,6 @@ import com.makeus.reject.adapter.model.User
 class MateAdapterSecond(private val context: Context) :
     ListAdapter<User, MateAdapterSecond.ViewHolder>(MateComparator()) {
 
-    interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.create(parent)
     }

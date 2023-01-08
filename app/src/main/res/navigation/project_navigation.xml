@@ -27,14 +27,15 @@
         <argument
             android:name="imgUrl"
             app:argType="string" />
+
+        <action
+            android:id="@+id/projectDetailFragment_to_fragment_project_people"
+            app:destination="@id/fragment_project_people"
+            app:enterAnim="@anim/view_fade_in"
+            app:exitAnim="@anim/view_fade_out"
+            app:popEnterAnim="@anim/view_fade_in"
+            app:popExitAnim="@anim/view_fade_out" />
     </fragment>
-
-
-    <fragment
-        android:id="@+id/fragment_project_detail"
-        android:name="com.makeus.reject.view.ProjectDetailFragment"
-        android:label="프로젝트 상세"
-        tools:layout="@layout/fragment_project_detail" />
 
     <fragment
         android:id="@+id/fragment_project_people"

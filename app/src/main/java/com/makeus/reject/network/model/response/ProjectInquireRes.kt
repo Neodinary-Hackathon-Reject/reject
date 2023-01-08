@@ -12,6 +12,6 @@ data class ProjectInquireResult(
 )
 
 data class ContestDto(
-    @SerializedName("contestId") val contestId: Int,
+    @SerializedName("contestId") val contestId: Long,
     @SerializedName("imgUrl") val imgUrl: String
 ) : Serializable

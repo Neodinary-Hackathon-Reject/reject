@@ -12,19 +12,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.makeus.reject.R
-import com.makeus.reject.adapter.model.User
+import com.makeus.reject.network.model.response.UserDto
 
 class PeopleAdapter(private val context: Context) :
-    ListAdapter<User, PeopleAdapter.ViewHolder>(MateComparator()) {
-    private lateinit var listener: OnItemClickListener
-
-    interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
+    ListAdapter<UserDto, PeopleAdapter.ViewHolder>(PeopleComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.create(parent)
@@ -33,12 +24,9 @@ class PeopleAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current, context)
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(it, position)
-        }
     }
 
-    fun getMate(position: Int): User {
+    fun getPeople(position: Int): UserDto {
         return getItem(position)
     }
 
@@ -57,17 +45,16 @@ class PeopleAdapter(private val context: Context) :
             }
         }
 
-        fun bind(item: User, context: Context) {
+        fun bind(item: UserDto, context: Context) {
             val adapter = KeywordAdapter()
             keywordRecyclerView.adapter = adapter
             keywordRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            val keywordList = listOf("#AI 개발", "#사업 기획자", "#백엔드 개발", "#프론트엔드 개발")
-            adapter.submitList(keywordList)
+            adapter.submitList(item.tendencyList)
 
             Glide
                 .with(context)
-                .load(item.profileImg)
+                .load(item.profileImageUrl)
                 .circleCrop()
                 .into(profileImgView)
             nickname.text = item.nickName
@@ -75,12 +62,12 @@ class PeopleAdapter(private val context: Context) :
         }
     }
 
-    class MateComparator : DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+    class PeopleComparator : DiffUtil.ItemCallback<UserDto>() {
+        override fun areItemsTheSame(oldItem: UserDto, newItem: UserDto): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+        override fun areContentsTheSame(oldItem: UserDto, newItem: UserDto): Boolean {
             return oldItem == newItem
         }
     }

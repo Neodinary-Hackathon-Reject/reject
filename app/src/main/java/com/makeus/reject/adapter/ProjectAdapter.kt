@@ -1,6 +1,5 @@
 package com.makeus.reject.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,18 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.reject.R
-import com.makeus.reject.adapter.model.Project
+import com.makeus.reject.network.model.response.RoomDto
 
-class ProjectAdapter(private val context: Context) :
-    ListAdapter<Project, ProjectAdapter.ViewHolder>(ProjectComparator()) {
-    private lateinit var listener: OnItemClickListener
+class ProjectAdapter(private val listener: OnItemClickListener) :
+    ListAdapter<RoomDto, ProjectAdapter.ViewHolder>(ProjectComparator()) {
 
     interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
+        fun onItemClick(roomDto: RoomDto)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,14 +24,10 @@ class ProjectAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current, context)
+        holder.bind(current)
         holder.itemView.setOnClickListener {
-            listener.onItemClick(it, position)
+            listener.onItemClick(getItem(position))
         }
-    }
-
-    fun getProject(position: Int): Project {
-        return getItem(position)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -55,26 +45,31 @@ class ProjectAdapter(private val context: Context) :
             }
         }
 
-        fun bind(item: Project, context: Context) {
+        fun bind(item: RoomDto) {
+            var msg = ""
+            for (x in item.jobList) {
+                msg += "${x} "
+            }
+            msg += "모집 중"
+
             val adapter = KeywordAdapter()
             keywordRecyclerView.adapter = adapter
             keywordRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            val keywordList = listOf("#전략적인", "#성실한", "#열정적인")
+                LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+            val keywordList = item.tendencyList
             adapter.submitList(keywordList)
 
-            titleText.text = item.title
-            introText.text = item.intro
-            peopleText.text = "${item.currentPeople}/${item.totalPeople}"
+            titleText.text = msg
+            peopleText.text = "${item.currentUserCount}/${item.maxUserCount}"
         }
     }
 
-    class ProjectComparator : DiffUtil.ItemCallback<Project>() {
-        override fun areItemsTheSame(oldItem: Project, newItem: Project): Boolean {
+    class ProjectComparator : DiffUtil.ItemCallback<RoomDto>() {
+        override fun areItemsTheSame(oldItem: RoomDto, newItem: RoomDto): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Project, newItem: Project): Boolean {
+        override fun areContentsTheSame(oldItem: RoomDto, newItem: RoomDto): Boolean {
             return oldItem == newItem
         }
     }

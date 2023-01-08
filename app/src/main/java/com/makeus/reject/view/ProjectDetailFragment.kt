@@ -2,32 +2,33 @@ package com.makeus.reject.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.makeus.reject.R
 import com.makeus.reject.adapter.FilterAdapter
 import com.makeus.reject.adapter.ProjectAdapter
 import com.makeus.reject.adapter.model.Filter
-import com.makeus.reject.adapter.model.Project
 import com.makeus.reject.base.BaseFragment
 import com.makeus.reject.databinding.FragmentProjectDetailBinding
 import com.makeus.reject.network.model.response.ContestDto
+import com.makeus.reject.network.model.response.RoomDto
 import com.makeus.reject.utils.BottomFilterDialog
+import com.makeus.reject.viewmodel.ProjectDetailViewModel
+import com.makeus.reject.viewmodel.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class ProjectDetailFragment :
     BaseFragment<FragmentProjectDetailBinding>(R.layout.fragment_project_detail) {
     private lateinit var projectAdapter: ProjectAdapter
     private lateinit var filterAdapter: FilterAdapter
+    private val projectDetailViewModel: ProjectDetailViewModel by viewModels { ViewModelFactory() }
 
     private lateinit var contestDto: ContestDto
 
-    private val projectList =
-        listOf(
-            Project("디자이너 개발자 모집 중", "이런 성향의 팀원을 찾아요!", listOf(""), 3, 5),
-            Project("디자이너 개발자 모집 중", "이런 성향의 팀원을 찾아요!", listOf(""), 3, 5),
-            Project("디자이너 개발자 모집 중", "이런 성향의 팀원을 찾아요!", listOf(""), 3, 5),
-            Project("디자이너 개발자 모집 중", "이런 성향의 팀원을 찾아요!", listOf(""), 3, 5),
-        )
     private val filterList =
         listOf(Filter("UNCHECKED", "선호장소"), Filter("CHECKED", "직무"))
 
@@ -36,12 +37,22 @@ class ProjectDetailFragment :
 
         arguments?.apply {
             contestDto = getSerializable("contestDtoKey") as ContestDto
+
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        projectAdapter = ProjectAdapter(requireContext())
+        projectAdapter = ProjectAdapter(object : ProjectAdapter.OnItemClickListener {
+            override fun onItemClick(roomDto: RoomDto) {
+                val bundle = bundleOf("roomDtoKey" to roomDto)
+                findNavController().navigate(
+                    R.id.projectDetailFragment_to_fragment_project_people,
+                    bundle
+                )
+            }
+
+        })
 
         Glide.with(this)
             .load(contestDto.imgUrl)
@@ -50,7 +61,14 @@ class ProjectDetailFragment :
         binding.projectRecyclerView.adapter = projectAdapter
         binding.projectRecyclerView.layoutManager =
             GridLayoutManager(activity, 2)
-        projectAdapter.submitList(projectList)
+
+        projectDetailViewModel.getRoomList(contestDto.contestId)
+        projectDetailViewModel.roomList.observe(requireActivity()) { rooms ->
+            if (!isAdded) return@observe
+            lifecycleScope.launch {
+                rooms.let { projectAdapter.submitList(rooms) }
+            }
+        }
 
         filterAdapter = FilterAdapter()
         filterAdapter.submitList(filterList)

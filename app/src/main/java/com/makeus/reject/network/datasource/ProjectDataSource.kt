@@ -1,6 +1,8 @@
 package com.makeus.reject.network.datasource
 
+import com.makeus.reject.App
 import com.makeus.reject.App.Companion.retrofit
+import com.makeus.reject.common.Consts
 import com.makeus.reject.network.api.ProjectService
 import com.makeus.reject.network.model.response.MemberInquireRes
 import com.makeus.reject.network.model.response.ProjectInquireRes
@@ -25,7 +27,11 @@ class ProjectDataSource constructor(
 
     suspend fun roomInquire(contestId: Long): Result<RoomInquireRes> =
         withContext(ioDispatcher) {
-            return@withContext projectService.getRoomList(contestId)
+            return@withContext projectService.getRoomList(
+                App.sharedPreferences.getString(
+                    Consts.X_ACCESS_TOKEN, ""
+                ) ?: "", contestId
+            )
         }
 
 }
