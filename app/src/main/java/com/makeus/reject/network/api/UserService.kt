@@ -2,10 +2,7 @@ package com.makeus.reject.network.api
 
 import com.makeus.reject.network.model.request.LoginReq
 import com.makeus.reject.network.model.request.SignupReq
-import com.makeus.reject.network.model.response.BaseResponse
-import com.makeus.reject.network.model.response.GetMateDetailRes
-import com.makeus.reject.network.model.response.GetMatesRes
-import com.makeus.reject.network.model.response.SignupRes
+import com.makeus.reject.network.model.response.*
 import retrofit2.http.*
 
 interface UserService {
@@ -13,7 +10,7 @@ interface UserService {
     suspend fun signup(@Body signupReq: SignupReq): Result<SignupRes>
 
     @POST("/users/login")
-    suspend fun login(@Body loginReq: LoginReq): Result<BaseResponse>
+    suspend fun login(@Body loginReq: LoginReq): Result<LoginRes>
 
     @GET("/users/check/userId")
     suspend fun checkEmailDuplication(@Query("userId") userId: String): Result<BaseResponse>

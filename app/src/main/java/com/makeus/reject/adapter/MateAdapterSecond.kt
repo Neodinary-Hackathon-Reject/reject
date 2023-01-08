@@ -54,7 +54,7 @@ class MateAdapterSecond(private val listener: OnItemClickListener) :
             keywordRecyclerView.adapter = adapter
             keywordRecyclerView.layoutManager =
                 LinearLayoutManager(profileImgView.context, LinearLayoutManager.HORIZONTAL, false)
-            val keywordList = listOf("#AI 개발", "#사업 기획자", "#백엔드 개발", "#프론트엔드 개발")
+            val keywordList = item.tendencyList
             adapter.submitList(keywordList)
 
             Glide

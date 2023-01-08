@@ -7,10 +7,7 @@ import com.makeus.reject.common.Consts
 import com.makeus.reject.network.api.UserService
 import com.makeus.reject.network.model.request.LoginReq
 import com.makeus.reject.network.model.request.SignupReq
-import com.makeus.reject.network.model.response.BaseResponse
-import com.makeus.reject.network.model.response.GetMateDetailRes
-import com.makeus.reject.network.model.response.GetMatesRes
-import com.makeus.reject.network.model.response.SignupRes
+import com.makeus.reject.network.model.response.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,7 +21,7 @@ class UserDataSource constructor(
             return@withContext userService.signup(signupReq)
         }
 
-    suspend fun login(loginReq: LoginReq): Result<BaseResponse> =
+    suspend fun login(loginReq: LoginReq): Result<LoginRes> =
         withContext(ioDispatcher) {
             return@withContext userService.login(loginReq)
         }

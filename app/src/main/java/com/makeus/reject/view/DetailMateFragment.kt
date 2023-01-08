@@ -35,6 +35,7 @@ class DetailMateFragment : BaseFragment<FragmentDetailMateBinding>(R.layout.frag
                 Glide
                     .with(requireContext())
                     .load(mateDetail.profileImgageUrl)
+                    .circleCrop()
                     .into(binding.profileImgView)
 
                 binding.nickname.text = mateDetail.nickname

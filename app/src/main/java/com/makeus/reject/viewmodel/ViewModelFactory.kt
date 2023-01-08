@@ -11,6 +11,9 @@ class ViewModelFactory : ViewModelProvider.Factory {
         return if (modelClass.isAssignableFrom(SignupViewModel::class.java)) {
             val repository = UserRepository()
             SignupViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+            val repository = UserRepository()
+            LoginViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             val repository = ProjectRepository()
             HomeViewModel(repository) as T
@@ -26,6 +29,9 @@ class ViewModelFactory : ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(MateDetailViewModel::class.java)) {
             val repository = UserRepository()
             MateDetailViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(MateViewModel::class.java)) {
+            val repository = ProjectRepository()
+            MateViewModel(repository) as T
         } else {
             throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")
         }
